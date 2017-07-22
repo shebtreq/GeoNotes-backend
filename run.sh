@@ -1,1 +1,2 @@
-cd .. && nodejs app.js
+#!/usr/bin/env bash
+npm start

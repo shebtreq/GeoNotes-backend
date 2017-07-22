@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "prestart": "mongod -dbpath=data/db",
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
@@ -14,6 +15,7 @@
     "mongodb": "*",
     "mongoose": "*",
     "morgan": "~1.5.1",
+    "node-uuid": "^1.4.8",
     "nodemon": "^1.11.0",
     "npm-run": "*"
   }

@@ -1,15 +1,16 @@
-﻿// db link
-var mongoose = require('mongoose');
+﻿var mongoose = require('mongoose');
+var uuid = require('node-uuid');
 
-// define the product model (fields and data types)
 var User = new mongoose.Schema({
+    _id: {  type: String,
+            default: function genUUID() {
+                    return uuid.v1();
+          }},
     name: {
         type: String,
         unique: true
     },
-    latitude: String,
-    longitude: String
+    notes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Note' }]
 });
 
-// make the model public so other files can access it
 module.exports = mongoose.model('User', User);

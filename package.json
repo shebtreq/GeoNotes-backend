@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "prestart": "mongod -dbpath=data/db",
-    "start": "nodemon ./bin/www"
+    "prestart": "mongod -dbpath=data/db &",
+    "start": "nodemon ./bin/www",
+    "poststop" : "lsof -P | grep ':27017' | awk '{print $2}' | xargs kill -9"
   },
   "dependencies": {
     "body-parser": "^1.17.2",

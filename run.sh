@@ -1,0 +1,1 @@
+cd .. && nodejs app.js

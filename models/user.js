@@ -6,9 +6,9 @@ var User = new mongoose.Schema({
     name: {
         type: String,
         unique: true
-    }//,
-    // lattidue: String,
-    // longitude: String
+    },
+    latitude: String,
+    longitude: String
 });
 
 // make the model public so other files can access it

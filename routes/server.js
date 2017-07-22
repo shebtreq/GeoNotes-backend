@@ -9,30 +9,41 @@ var User = require('../models/user.js');
 ////////////////
 var router = require('express').Router();
 
-router.get('/users/:name', function(req, res, next) {
-    console.log("inside users");
-    res.send(200);
-    User.find({ name: res.name })
-        .exec(function (err, user) {
-            if (!err) {
-                res.append("user", user);
-            }
+router.put('/login',
+    function(req, res, next) {
+        console.log("user being added: " + req.query.user);
+        var user = new User({
+            name: req.query.user
+        }).save();
+        res.sendStatus(200);
+    });
 
+
+router.put('/users/:name', function(req, res, next) {
+    console.log("getting user: " + req.params.name);
+    var newUser = req.body.user;
+    User.findOneAndUpdate(
+        { name: req.params.name },
+        newUser,
+        { upsert: true },
+        function(err, doc) {
+            if (err) next();
+            return res.status(200).send(req.body);
+    });
+});
+
+router.get('/users', function(req, res, next) {
+    console.log("getting users");
+    User.find({})
+        .lean()
+        .exec(function (err, users) {
+            if (err === null) {
+                res.status(200).send(users);
+            } else {
+                next();
+            }
         });
 });
 
-router.put('/login?'
-    + 'user=:name'
-    // + '&password=:password'
-    // + '&location=:longitude'
-    // + '&latitude=:latitude'
-    ,
-    function(req, res, next) {
-
-    var user = new User({
-        name: req.name
-    });
-    res.send(200);
-});
 
 module.exports = router;

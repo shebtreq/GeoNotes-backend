@@ -6,8 +6,10 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "body-parser": "^1.17.2",
     "debug": "~2.1.1",
     "express": "^4.15.3",
+    "express-jsonstream": "0.0.3",
     "mongod": "*",
     "mongodb": "*",
     "mongoose": "*",

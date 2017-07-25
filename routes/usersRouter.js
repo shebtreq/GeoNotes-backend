@@ -8,10 +8,9 @@ var usersRouter = require('express').Router();
 
 usersRouter.put('/login',
     function(req, res, next) {
-        var user = new User({
+        new User({
             name: req.query.user
         }).save(function (err, user) {
-            if (err) next();
             res.sendStatus(200);
         });
     });
